@@ -11,6 +11,8 @@ router.get("/profile", ensureAuth, postsController.getProfile);
 router.get("/feed", ensureAuth, postsController.getFeed);
 router.get("/login", authController.getLogin);
 router.post("/login", authController.postLogin);
+router.get("/google/callback", authController.getLoginGoogleCallback);
+router.get("/google", authController.getLoginGoogle);
 router.get("/logout", authController.logout);
 router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
