@@ -2,9 +2,12 @@ const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
 
-exports.getLoginGoogle = (req, res) => passport.authenticate("google", { scope: ["profile"] });
+exports.getLoginGoogle = (req, res) => {
+	passport.authenticate("google", { scope: ["profile"] });
+};
 
 exports.getLoginGoogleCallback = (req, res) => {
+	// eslint-disable-next-line no-unused-expressions
 	passport.authenticate("google", { failureRedirect: "/" }),
 		(req, res) => {
 			res.redirect("/feed");
