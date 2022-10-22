@@ -1,27 +1,37 @@
 import logo from "./logo.svg";
 import Header from "./components/Header";
+import Feed from "./components/Feed";
+import Post from "./components/Post";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import { createBrowserRouter, RouterProvider, Route, Link, useParams } from "react-router-dom";
 import "./App.css";
+
+// id={useParams()}
+const router = createBrowserRouter([
+	{
+		path: "/",
+		element: <Feed />,
+	},
+	{
+		path: "/post/:id",
+		element: <Post />,
+	},
+	{
+		path: "/login",
+		element: <Login />,
+	},
+	{
+		path: "/signup",
+		element: <Signup />,
+	},
+]);
 
 function App() {
 	return (
 		<>
 			<Header />
-			<div className="App">
-				<header className="App-header">
-					<img src={logo} className="App-logo" alt="logo" />
-					<p>
-						Edit <code>src/App.js</code> and save to reload.
-					</p>
-					<a
-						className="App-link"
-						href="https://reactjs.org"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Learn React
-					</a>
-				</header>
-			</div>
+			<RouterProvider router={router} />
 		</>
 	);
 }
