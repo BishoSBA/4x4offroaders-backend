@@ -1,8 +1,12 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
 	return (
 		<div className="navbar bg-base-100">
 			<div className="flex-1">
-				<a className="btn btn-ghost normal-case text-xl">4x4Offroaders</a>
+				<a href="/" className="btn btn-ghost normal-case text-xl">
+					4x4Offroaders
+				</a>
 			</div>
 			<div className="flex-none">
 				<div className="dropdown dropdown-end">
@@ -16,10 +20,7 @@ const Header = () => {
 						className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
 					>
 						<li>
-							<a className="justify-between">
-								Profile
-								<span className="badge">New</span>
-							</a>
+							<a>Profile</a>
 						</li>
 						<li>
 							<a>Settings</a>

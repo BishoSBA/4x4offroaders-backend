@@ -1,4 +1,22 @@
-const Login = () => {
+import { Link } from "react-router-dom";
+
+const handleSubmit = async (data) => {
+	const urlencoded = new URLSearchParams({
+		email: data.email,
+		password: data.password,
+		password: "xyz1234",
+		scope: "write",
+		client_id: "test",
+		client_secret: "test12",
+	});
+
+	const res = fetch("/login", {
+		method: "POST",
+		body: urlencoded,
+	});
+};
+
+const Login = ({ onSubmit }) => {
 	return (
 		<div class="bg-white font-family-karla h-screen">
 			<div class="w-full flex flex-wrap">
@@ -41,14 +59,15 @@ const Login = () => {
 								type="submit"
 								value="Log In"
 								class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8"
+								onSubmit={onSubmit}
 							/>
 						</form>
 						<div class="text-center pt-12 pb-12">
 							<p>
 								Don't have an account?{" "}
-								<a href="register.html" class="underline font-semibold">
-									Register here.
-								</a>
+								<Link to="./signup">
+									<a class="underline font-semibold">Register here.</a>
+								</Link>
 							</p>
 						</div>
 					</div>
