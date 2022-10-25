@@ -32,7 +32,8 @@ exports.postLogin = (req, res, next) => {
 
 	if (validationErrors.length) {
 		req.flash("errors", validationErrors);
-		return res.redirect("/login");
+		return false;
+		//return res.redirect("/login")
 	}
 	req.body.email = validator.normalizeEmail(req.body.email, {
 		gmail_remove_dots: false,
@@ -40,17 +41,21 @@ exports.postLogin = (req, res, next) => {
 
 	passport.authenticate("local", (err, user, info) => {
 		if (err) {
+			// return err;
 			return next(err);
 		}
 		if (!user) {
 			req.flash("errors", info);
+			// return false;
 			return res.redirect("/login");
 		}
 		req.logIn(user, (err) => {
 			if (err) {
+				// return err;
 				return next(err);
 			}
 			req.flash("success", { msg: "Success! You are logged in." });
+			// return true;
 			res.redirect(req.session.returnTo || "/profile");
 		});
 	})(req, res, next);

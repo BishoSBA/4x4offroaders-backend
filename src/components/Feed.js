@@ -12,12 +12,13 @@ const Feed = async () => {
 	const data = res.json();
 
 	// add the posts to an array
+
 	const posts = [];
 	for (let post in data) {
 		posts.push(<Post post={post}></Post>);
 	}
 
-	return <>{...posts}</>;
+	return <>{posts}</>;
 };
 
 export default Feed;
