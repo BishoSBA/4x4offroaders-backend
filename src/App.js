@@ -15,11 +15,10 @@ function App() {
 			<Header />
 			<Router>
 				<Routes>
-					<Route path="login" element={<Login />} />
-					<Route path="/" element={<Feed />} />
-					<Route index element={<Login />} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/" element={<Login />} />
 					<Route path=":postId" element={<Post />} />
-					<Route path="signup" element={<Signup />} />
+					<Route path="/signup" element={<Signup />} />
 				</Routes>
 			</Router>
 		</>

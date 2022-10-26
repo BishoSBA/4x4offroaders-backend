@@ -5,10 +5,11 @@
 	"main": "server.js",
 	"scripts": {
 		"start": "nodemon server.js",
-		"react": "set PORT=3006 && react-scripts start",
+		"react": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
+	"proxy": "http://localhost:2121",
 	"author": "",
 	"license": "MIT",
 	"dependencies": {

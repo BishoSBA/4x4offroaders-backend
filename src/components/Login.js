@@ -3,9 +3,8 @@ import { Link, redirect } from "react-router-dom";
 const Login = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(e.target.email.value);
 
-		const token = await fetch("http://localhost:3000/login", {
+		const token = await fetch("/login", {
 			method: "POST",
 			body: JSON.stringify({
 				email: e.target.email.value,
@@ -18,7 +17,7 @@ const Login = () => {
 			console.log("Auth Error");
 		} else {
 			// redirect("/feed");
-			console.log("SUCCESS!");
+			console.log("Success");
 		}
 	};
 
