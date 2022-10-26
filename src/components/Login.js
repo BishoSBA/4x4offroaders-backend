@@ -1,30 +1,27 @@
 import { Link, redirect } from "react-router-dom";
 
-const handleSubmit = async (e) => {
-	e.preventDefault();
-	console.log(e);
-	const token = fetch("/login", {
-		method: "POST",
-		headers: {
-			Accept: "application/json, text/plain, */*",
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-			email: e.email.value,
-			password: e.password.value,
-		}),
-	});
-	console.log(token);
-
-	if (!token) {
-		console.log("Auth Error");
-	} else {
-		// redirect("/feed");
-		console.log("SUCCESS!");
-	}
-};
-
 const Login = () => {
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		console.log(e.target.email.value);
+
+		const token = await fetch("http://localhost:3000/login", {
+			method: "POST",
+			body: JSON.stringify({
+				email: e.target.email.value,
+				password: e.target.password.value,
+			}),
+		});
+		console.log(token);
+
+		if (!token) {
+			console.log("Auth Error");
+		} else {
+			// redirect("/feed");
+			console.log("SUCCESS!");
+		}
+	};
+
 	return (
 		<div className="bg-white font-family-karla h-screen">
 			<div className="w-full flex flex-wrap">
@@ -38,7 +35,7 @@ const Login = () => {
 
 					<div className="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
 						<p className="text-center text-3xl">Welcome.</p>
-						<form className="flex flex-col pt-3 md:pt-8">
+						<form className="flex flex-col pt-3 md:pt-8" onSubmit={handleSubmit}>
 							<div className="flex flex-col pt-4">
 								<label htmlFor="email" className="text-lg">
 									Email
@@ -67,7 +64,6 @@ const Login = () => {
 								type="submit"
 								value="Log In"
 								className="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8"
-								onSubmit={handleSubmit}
 							/>
 						</form>
 						<div className="text-center pt-12 pb-12">

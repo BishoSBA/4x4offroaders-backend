@@ -23,7 +23,7 @@ exports.getLogin = (req, res) => {
 	});
 };
 
-exports.postLogin = (req, res, next) => {
+exports.postLogin = (req, res) => {
 	const validationErrors = [];
 	if (!validator.isEmail(req.body.email))
 		validationErrors.push({ msg: "Please enter a valid email address." });
@@ -41,24 +41,24 @@ exports.postLogin = (req, res, next) => {
 
 	passport.authenticate("local", (err, user, info) => {
 		if (err) {
-			// return err;
-			return next(err);
+			return err;
+			// return next(err);
 		}
 		if (!user) {
 			req.flash("errors", info);
-			// return false;
-			return res.redirect("/login");
+			return false;
+			// return res.redirect("/login");
 		}
 		req.logIn(user, (err) => {
 			if (err) {
-				// return err;
-				return next(err);
+				return err;
+				// return next(err);
 			}
 			req.flash("success", { msg: "Success! You are logged in." });
-			// return true;
-			res.redirect(req.session.returnTo || "/profile");
+			return true;
+			// res.redirect(req.session.returnTo || "/profile");
 		});
-	})(req, res, next);
+	})(req, res);
 };
 
 exports.logout = (req, res) => {
