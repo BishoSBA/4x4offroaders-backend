@@ -8,9 +8,12 @@ exports.getLoginGoogle = (req, res) => {
 
 exports.getLoginGoogleCallback = (req, res) => {
 	// eslint-disable-next-line no-unused-expressions
-	passport.authenticate("google", { failureRedirect: "/" }),
+	passport.authenticate("google", { successRedirect: "/post", failureRedirect: "/" }),
 		(req, res) => {
-			res.redirect("/feed");
+			res.json({
+				success: true,
+				user: req.user,
+			});
 		};
 };
 
@@ -46,16 +49,20 @@ exports.postLogin = (req, res) => {
 		}
 		if (!user) {
 			req.flash("errors", info);
-			return "No User";
+			console.log("No user in log");
+			res.json({ User: null });
+			return;
 			// return res.redirect("/login");
 		}
 		req.logIn(user, (err) => {
 			if (err) {
-				return err;
+				res.json({ User: null, Error: err });
 				// return next(err );
 			}
 			req.flash("success", { msg: "Success! You are logged in." });
-			return "Yes User";
+			console.log({ user });
+			res.json({ User: user });
+			return;
 			// res.redirect(req.session.returnTo || "/profile");
 		});
 	})(req, res);

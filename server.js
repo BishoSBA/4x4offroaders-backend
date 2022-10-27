@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
 const passport = require("passport");
@@ -20,6 +21,9 @@ require("./config/passport")(passport);
 
 //Connect To Database
 connectDB();
+
+//Solving cross-origin access issues
+app.use(cors());
 
 //Using EJS for views
 // app.set("view engine", "ejs");

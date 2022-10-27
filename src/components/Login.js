@@ -1,23 +1,39 @@
-import { Link, redirect } from "react-router-dom";
+import { json, Link, redirect } from "react-router-dom";
 
 const Login = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const token = await fetch("/login", {
+		const token = await fetch("http://127.0.0.1:2121/login", {
 			method: "POST",
+			headers: { "content-type": "application/json" },
 			body: JSON.stringify({
 				email: e.target.email.value,
 				password: e.target.password.value,
 			}),
 		});
-		console.log(token);
+		console.log(await token.json());
 
 		if (!token) {
 			console.log("Auth Error");
 		} else {
 			// redirect("/feed");
 			console.log("Success");
+		}
+	};
+
+	const handleGoogleSignIn = async (e) => {
+		const token = fetch("http://127.0.0.1:2121/google", {
+			method: "GET",
+			headers: { "content-type": "application/json" },
+		});
+		console.log(await token.json());
+
+		if (!token) {
+			console.log("Google Auth Error");
+		} else {
+			// redirect("/feed");
+			console.log("Google Success");
 		}
 	};
 
@@ -65,6 +81,14 @@ const Login = () => {
 								className="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8"
 							/>
 						</form>
+						<button
+							type="button"
+							onClick={handleGoogleSignIn}
+							className="bg-red-700 text-white font-bold text-lg hover:bg-red-600 p-2 mt-8"
+						>
+							{" "}
+							Login with Google{" "}
+						</button>
 						<div className="text-center pt-12 pb-12">
 							<p>
 								Don't have an account?{" "}
