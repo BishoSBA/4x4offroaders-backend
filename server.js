@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+
+const cookieParser = require("cookie-parser"); // parse cookie header
 const app = express();
 const mongoose = require("mongoose");
 const passport = require("passport");
@@ -9,9 +11,10 @@ const methodOverride = require("method-override");
 const flash = require("express-flash");
 const logger = require("morgan");
 const connectDB = require("./config/database");
-const mainRoutes = require("./routes/main");
-const postRoutes = require("./routes/posts");
-const commentRoutes = require("./routes/comments");
+const authRoutes = require("./routes/auth");
+// const mainRoutes = require("./routes/main");
+// const postRoutes = require("./routes/posts");
+// const commentRoutes = require("./routes/comments");
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -22,8 +25,22 @@ require("./config/passport")(passport);
 //Connect To Database
 connectDB();
 
+app.use(
+	cookieSession({
+		name: "session",
+		keys: [keys.COOKIE_KEY],
+		maxAge: 24 * 60 * 60 * 100,
+	})
+);
+
 //Solving cross-origin access issues
-app.use(cors());
+app.use(
+	cors({
+		origin: "http://localhost:3000", // allow to server to accept request from different origin
+		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+		credentials: true, // allow session cookie from browser to pass through
+	})
+);
 
 //Using EJS for views
 // app.set("view engine", "ejs");
@@ -58,10 +75,19 @@ app.use(passport.session());
 //Use flash messages for errors, info, ect...
 app.use(flash());
 
+//Check authentication
+const authCheck = (req, res, next) => {
+	next();
+};
+
 //Setup Routes For Which The Server Is Listening
-app.use("/", mainRoutes);
-app.use("/post", postRoutes);
-app.use("/comments", commentRoutes);
+app.get("/", authCheck, (req, res) => {
+	res.status(200);
+});
+
+app.use("/auth", authRoutes);
+// app.use("/post", postRoutes);
+// app.use("/comments", commentRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {

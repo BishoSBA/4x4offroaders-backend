@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const User = require("../models/User");
 
 module.exports = function (passport) {
+	// eslint-disable-next-line no-unused-expressions
 	passport.use(
 		new GoogleStrategy(
 			{

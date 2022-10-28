@@ -4,7 +4,7 @@ const Login = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const token = await fetch("http://127.0.0.1:2121/login", {
+		const token = await fetch("/auth/login", {
 			method: "POST",
 			headers: { "content-type": "application/json" },
 			body: JSON.stringify({
@@ -23,11 +23,11 @@ const Login = () => {
 	};
 
 	const handleGoogleSignIn = async (e) => {
-		const token = fetch("http://127.0.0.1:2121/google", {
+		window.open("/auth/google", "_self");
+		const token = fetch("/auth/google", {
 			method: "GET",
-			headers: { "content-type": "application/json" },
 		});
-		console.log(await token.json());
+		console.log(await token);
 
 		if (!token) {
 			console.log("Google Auth Error");
