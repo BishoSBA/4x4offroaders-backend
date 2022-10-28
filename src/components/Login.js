@@ -1,4 +1,7 @@
 import { json, Link, redirect } from "react-router-dom";
+import { useEffect } from "react";
+
+const checkAuth = () => {};
 
 const Login = () => {
 	const handleSubmit = async (e) => {
@@ -23,7 +26,7 @@ const Login = () => {
 	};
 
 	const handleGoogleSignIn = async (e) => {
-		window.open("/auth/google", "_self");
+		// window.open("/auth/google", "_self");
 		const token = fetch("/auth/google", {
 			method: "GET",
 		});

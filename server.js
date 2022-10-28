@@ -1,7 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-
-const cookieParser = require("cookie-parser"); // parse cookie header
 const app = express();
 const mongoose = require("mongoose");
 const passport = require("passport");
@@ -24,14 +22,6 @@ require("./config/passport")(passport);
 
 //Connect To Database
 connectDB();
-
-app.use(
-	cookieSession({
-		name: "session",
-		keys: [keys.COOKIE_KEY],
-		maxAge: 24 * 60 * 60 * 100,
-	})
-);
 
 //Solving cross-origin access issues
 app.use(

@@ -1,27 +1,28 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
-const CLIENT_HOME_PAGE_URL = "http://localhost:3000";
+const CLIENT_HOME_PAGE_URL = "/signup";
 
 exports.getLoginGoogle = (req, res) => {
 	passport.authenticate("google", { scope: ["profile"] });
-	console.log(req);
+	res.redirect("http://localhost:2121/google/callback");
+	console.log(req.user);
 };
 
-exports.getLoginGoogleCallback = (req, res) => {
+exports.getLoginGoogleCallback = (req, res, next) => {
 	// eslint-disable-next-line no-unused-expressions
 	passport.authenticate("google", {
-    successRedirect: CLIENT_HOME_PAGE_URL,
-    failureRedirect: "/auth/login/failed"
-  })
-		//, (req, res) => {
-		// 	res.json({
-		// 		success: true,
-		// 		message: "user has successfully authenticated",
-		// 		user: req.user,
-		// 		// cookies: req.cookies
-		// 	});
-		// };
+		successRedirect: CLIENT_HOME_PAGE_URL,
+		failureRedirect: "/auth/login/failed",
+	}),
+		(req, res) => {
+			res.json({
+				success: true,
+				message: "user has successfully authenticated",
+				user: req.user,
+				// cookies: req.cookies
+			});
+		};
 };
 
 exports.getLoginGoogleSuccess = (req, res) => {
@@ -35,11 +36,11 @@ exports.getLoginGoogleSuccess = (req, res) => {
 
 // when login failed, send failed msg
 exports.getLoginGoogleFailed = (req, res) => {
-  res.status(401).json({
-    success: false,
-    message: "user failed to authenticate."
-  });
-});
+	res.status(401).json({
+		success: false,
+		message: "user failed to authenticate.",
+	});
+};
 
 exports.getLogin = (req, res) => {
 	if (req.user) {
