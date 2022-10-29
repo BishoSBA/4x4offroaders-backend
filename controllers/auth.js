@@ -3,16 +3,13 @@ const validator = require("validator");
 const User = require("../models/User");
 const CLIENT_HOME_PAGE_URL = "/signup";
 
-exports.getLoginGoogle = (req, res) => {
+exports.getGoogle = (req, res) => {
 	passport.authenticate("google", { scope: ["profile"] });
-	res.redirect("http://localhost:2121/google/callback");
-	console.log(req.user);
 };
 
-exports.getLoginGoogleCallback = (req, res, next) => {
+exports.getGoogleCallback = (req, res, next) => {
 	// eslint-disable-next-line no-unused-expressions
 	passport.authenticate("google", {
-		successRedirect: CLIENT_HOME_PAGE_URL,
 		failureRedirect: "/auth/login/failed",
 	}),
 		(req, res) => {
@@ -25,7 +22,7 @@ exports.getLoginGoogleCallback = (req, res, next) => {
 		};
 };
 
-exports.getLoginGoogleSuccess = (req, res) => {
+exports.getGoogleSuccess = (req, res) => {
 	if (req.user) {
 		res.json({
 			message: "User Authenticated",
@@ -35,7 +32,7 @@ exports.getLoginGoogleSuccess = (req, res) => {
 };
 
 // when login failed, send failed msg
-exports.getLoginGoogleFailed = (req, res) => {
+exports.getGoogleFailed = (req, res) => {
 	res.status(401).json({
 		success: false,
 		message: "user failed to authenticate.",
