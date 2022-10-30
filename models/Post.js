@@ -27,10 +27,10 @@ const PostSchema = new mongoose.Schema({
 			required: true,
 		},
 		brands: {
-			type: [String],
+			type: String,
 		},
 		workshops: {
-			type: [String],
+			type: String,
 		},
 	},
 	user: {

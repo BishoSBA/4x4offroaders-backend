@@ -10,9 +10,9 @@ const flash = require("express-flash");
 const logger = require("morgan");
 const connectDB = require("./config/database");
 const authRoutes = require("./routes/auth");
-// const mainRoutes = require("./routes/main");
-// const postRoutes = require("./routes/posts");
-// const commentRoutes = require("./routes/comments");
+const mainRoutes = require("./routes/main");
+const postRoutes = require("./routes/posts");
+const commentRoutes = require("./routes/comments");
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -75,9 +75,10 @@ app.get("/", authCheck, (req, res) => {
 	res.status(200);
 });
 
+app.use("/", mainRoutes);
 app.use("/auth", authRoutes);
-// app.use("/post", postRoutes);
-// app.use("/comments", commentRoutes);
+app.use("/post", postRoutes);
+app.use("/comments", commentRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {

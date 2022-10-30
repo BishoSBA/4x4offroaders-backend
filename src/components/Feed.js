@@ -1,24 +1,26 @@
+// To Test
+
 import Post from "./Post";
-import { Link } from "react-router-dom";
 
 const Feed = async () => {
 	// fetch the posts from the database
-	const res = await fetch("/feed/posts", {
+	const res = await fetch("/feed", {
 		method: "GET",
 		headers: {
 			"Content-Type": "application/json",
 		},
 	});
-	const data = res.json();
+
+	console.log(res.posts);
+	const postsArray = [];
 
 	// add the posts to an array
 
-	const posts = [];
-	for (let post in data) {
-		posts.push(<Post post={post}></Post>);
-	}
+	// for (let post in posts) {
+	// 	postsArray.push(<Post post={post}></Post>);
+	// }
 
-	return <>{posts}</>;
+	// return <>{postsArray}</>;
 };
 
 export default Feed;

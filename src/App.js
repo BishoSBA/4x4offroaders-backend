@@ -52,6 +52,7 @@ function App() {
 			<Router>
 				<Routes>
 					<Route path="/login" element={<Login />} />
+					<Route path="/feed" element={<Feed />} />
 					<Route path="/" element={<Login />} />
 					<Route path=":postId" element={<Post />} />
 					<Route path="/signup" element={<Signup />} />

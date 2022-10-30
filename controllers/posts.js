@@ -6,7 +6,7 @@ module.exports = {
 	getProfile: async (req, res) => {
 		try {
 			const posts = await Post.find({ user: req.user.id });
-			return { posts: posts, user: req.user };
+			res.json({ posts: posts, user: req.user });
 			// res.render("profile.ejs", { posts: posts, user: req.user });
 		} catch (err) {
 			console.log(err);
@@ -15,7 +15,8 @@ module.exports = {
 	getFeed: async (req, res) => {
 		try {
 			const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-			res.render("feed.ejs", { posts: posts });
+			res.json({ posts: posts });
+			// res.render("feed.ejs", { posts: posts });
 		} catch (err) {
 			console.log(err);
 		}
@@ -24,7 +25,8 @@ module.exports = {
 		try {
 			const post = await Post.findById(req.params.id);
 			const comment = await Comment.find({ postid: req.params.id });
-			res.render("post.ejs", { post: post, user: req.user, comment: comment });
+			res.json({ post: post, user: req.user, comment: comment });
+			// res.render("post.ejs", { post: post, user: req.user, comment: comment });
 		} catch (err) {
 			console.log(err);
 		}
@@ -43,7 +45,8 @@ module.exports = {
 				user: req.user.id,
 			});
 			console.log("Post has been added!");
-			res.redirect("/profile");
+			res.json({ success: true, message: "Post has been added" });
+			// res.redirect("/profile");
 		} catch (err) {
 			console.log(err);
 		}
@@ -57,7 +60,8 @@ module.exports = {
 				}
 			);
 			console.log("Likes +1");
-			res.redirect(`/post/${req.params.id}`);
+			res.json({ success: true, message: "Post has been Liked" });
+			// res.redirect(`/post/${req.params.id}`);
 		} catch (err) {
 			console.log(err);
 		}
@@ -71,7 +75,9 @@ module.exports = {
 			// Delete post from db
 			await Post.remove({ _id: req.params.id });
 			console.log("Deleted Post");
-			res.redirect("/profile");
+
+			res.json({ success: true, message: "Post has been deleted" });
+			// res.redirect("/profile");
 		} catch (err) {
 			res.redirect("/profile");
 		}
