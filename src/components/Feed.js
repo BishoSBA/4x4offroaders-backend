@@ -16,11 +16,11 @@ const Feed = async () => {
 
 	// add the posts to an array
 
-	// for (let post in posts) {
-	// 	postsArray.push(<Post post={post}></Post>);
-	// }
+	for (let post in posts) {
+		postsArray.push(<Post post={post}></Post>);
+	}
 
-	// return <>{postsArray}</>;
+	return <>{postsArray}</>;
 };
 
 export default Feed;
