@@ -1,7 +1,7 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const LocalStrategy = require("passport-local").Strategy;
 const mongoose = require("mongoose");
-const User = require("../models/User");
+const User = require("../backend/models/User");
 
 module.exports = function (passport) {
 	// eslint-disable-next-line no-unused-expressions
@@ -10,7 +10,7 @@ module.exports = function (passport) {
 			{
 				clientID: process.env.GOOGLE_CLIENT_ID,
 				clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-				callbackURL: "/api/auth/google/callback",
+				callbackURL: "http://localhost:2121/api/auth/google/callback",
 			},
 			async (accessToken, refreshToken, profile, done) => {
 				const newUser = {
