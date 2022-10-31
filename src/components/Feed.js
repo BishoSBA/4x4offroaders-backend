@@ -4,23 +4,19 @@ import Post from "./Post";
 
 const Feed = async () => {
 	// fetch the posts from the database
-	const res = await fetch("/feed", {
-		method: "GET",
-		headers: {
-			"Content-Type": "application/json",
-		},
-	});
+	const posts = await fetch("http://localhost:2121/api/feed")
+		.then((response) => response.json())
+		.then((data) => {
+			// add the posts to an array
+			const postsArray = data.posts.map((post) => {
+				return <Post key={post._id} post={post}></Post>;
+			});
 
-	console.log(res.posts);
-	const postsArray = [];
+			return postsArray;
+		});
 
-	// add the posts to an array
-
-	for (let post in posts) {
-		postsArray.push(<Post post={post}></Post>);
-	}
-
-	return <>{postsArray}</>;
+	console.log(posts);
+	return posts;
 };
 
 export default Feed;

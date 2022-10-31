@@ -75,10 +75,10 @@ app.get("/", authCheck, (req, res) => {
 	res.status(200);
 });
 
-app.use("/", mainRoutes);
-app.use("/auth", authRoutes);
-app.use("/post", postRoutes);
-app.use("/comments", commentRoutes);
+app.use("/api/", mainRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/post", postRoutes);
+app.use("/api/comments", commentRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {

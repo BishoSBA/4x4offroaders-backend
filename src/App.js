@@ -12,8 +12,8 @@ const Router = BrowserRouter;
 
 function App() {
 	const { authenticated, setAuthenticated } = useState(false);
-	const { error, setError } = useState(null);
-	const { user, setUser } = useState({});
+	// const { error, setError } = useState(null);
+	// const { user, setUser } = useState({});
 
 	// useEffect(() => {
 	// 	fetch("/auth/login/success", {
@@ -51,8 +51,8 @@ function App() {
 			<Header authenticated={authenticated} />
 			<Router>
 				<Routes>
-					<Route path="/login" element={<Login />} />
 					<Route path="/feed" element={<Feed />} />
+					<Route path="/login" element={<Login />} />
 					<Route path="/" element={<Login />} />
 					<Route path=":postId" element={<Post />} />
 					<Route path="/signup" element={<Signup />} />

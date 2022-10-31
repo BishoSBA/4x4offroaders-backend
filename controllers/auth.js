@@ -4,7 +4,8 @@ const User = require("../models/User");
 const CLIENT_HOME_PAGE_URL = "/signup";
 
 exports.getGoogle = (req, res) => {
-	passport.authenticate("google", { scope: ["profile"] });
+	passport.authenticate("google", { scope: ["profile", "email"] });
+	console.log(res);
 };
 
 exports.getGoogleCallback = (req, res, next) => {
