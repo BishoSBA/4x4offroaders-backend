@@ -15,7 +15,7 @@ const Post = () => {
 	};
 
 	return (
-		<div className="place-self-center max-w-lg rounded-lg">
+		<div className="place-self-center p-12">
 			<figure>
 				<img src={post.image} alt="img" />
 			</figure>

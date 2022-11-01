@@ -41,7 +41,7 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-white font-family-karla h-screen">
+    <div className="bg-white font-family-karla min-h-screen">
       <div className="w-full flex flex-wrap">
         {/* <!-- Login Section --> */}
         <div className="w-full md:w-1/2 flex flex-col">
