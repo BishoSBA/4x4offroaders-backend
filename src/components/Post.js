@@ -1,24 +1,21 @@
-const Post = (post) => {
-	console.log(post);
+import PostCard from "./PostCard";
+import Comment from "./Comment";
+
+const Post = ({ post }) => {
 	return (
-		<>
-			<div className="card w-96 bg-base-100 shadow-xl m-4">
-				<figure>
-					<img src={post.image} alt="img" />
-				</figure>
-				<div className="card-body">
-					<h2 className="card-title">
-						{post.title}
-						<div className="badge badge-secondary">NEW</div>
-					</h2>
-					<div className="card-actions justify-end">
-						{/* <div className="badge badge-outline">{post.tags.vehicle}</div>
-						<div className="badge badge-outline">{post.tags.brands}</div>
-						<div className="badge badge-outline">{post.tags.workshops}</div> */}
-					</div>
-				</div>
-			</div>
-		</>
+		<div className="flex justify-center max-w-lg rounded-lg">
+			<figure>
+				<img src={post.image} alt="img" />
+			</figure>
+			<span>Likes: Plug Likes</span>
+			<span>Comments: Plug Comments</span>
+			<ul>
+				<li>Vehicle: LC79</li>
+				<li>Brands: LC79</li>
+				<li>Workshops: LC79</li>
+			</ul>
+			<div>Plug comments</div>
+		</div>
 	);
 };
 
