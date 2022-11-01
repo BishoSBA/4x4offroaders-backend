@@ -25,7 +25,7 @@ const Feed = () => {
 			title: "Numero Duo Test",
 			user: "62f6b75a75ee0270144f8061",
 			__v: 0,
-			_id: "63496fba69a63b3ef076ce51",
+			_id: "test63496fba69a63b3ef076ce51",
 		},
 		{
 			caption: "I think this is working right?",
@@ -55,8 +55,6 @@ const Feed = () => {
 		return <PostCard key={post._id} post={post}></PostCard>;
 	});
 
-	console.log(postsArray);
-	// return <div>Hi</div>;
 	return (
 		<>
 			<div className="flex flex-wrap gap-4 p-6 rounded-lg shadow-lg bg-white justify-center">

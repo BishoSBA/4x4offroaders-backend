@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 const Postcard = ({ post }) => {
-  console.log(post);
   return (
     <Link to="/post">
       <div className="card w-96 bg-base-100 shadow-2xl m-4 hover:scale-105 duration-500">
