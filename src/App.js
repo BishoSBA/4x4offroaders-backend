@@ -1,7 +1,7 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Feed from "./components/Feed";
-// import Post from "./components/Post";
+import Post from "./components/Post";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import { useState, useEffect } from "react";
@@ -50,18 +50,18 @@ function App() {
 	return (
 		<>
 			<Header authenticated={authenticated} />
-			<div class="bg-white">
+			<div className="flex flex-col p-5 bg-white">
 				<Router>
 					<Routes>
 						<Route path="/feed" element={<Feed />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/" element={<Feed />} />
-						{/* <Route path=":postId" element={<Post />} /> */}
+						<Route path="/post" element={<Post />} />
 						<Route path="/signup" element={<Signup />} />
 					</Routes>
 				</Router>
-				<Footer />
 			</div>
+			<Footer />
 		</>
 	);
 }

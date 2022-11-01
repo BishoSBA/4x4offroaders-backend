@@ -1,3 +1,5 @@
+import Link from "react";
+
 const Postcard = ({ post }) => {
 	console.log(post);
 	return (
