@@ -4,9 +4,9 @@ const Header = () => {
   return (
     <div className="sticky top-0 navbar bg-gray-900 z-10" >
       <div className="flex-1">
-        <a href="/" className="btn btn-ghost normal-case text-xl">
+        <Link to="/" className="btn btn-ghost normal-case text-xl">
           4x4Offroaders
-        </a>
+        </Link>
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">

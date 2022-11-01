@@ -49,9 +49,9 @@ function App() {
 	// });
 	return (
 		<>
+      <Router>
 			<Header authenticated={authenticated} />
 			<div className="flex flex-col p-5 bg-white">
-				<Router>
 					<Routes>
 						<Route path="/feed" element={<Feed />} />
 						<Route path="/login" element={<Login />} />
@@ -59,9 +59,9 @@ function App() {
 						<Route path="/post" element={<Post />} />
 						<Route path="/signup" element={<Signup />} />
 					</Routes>
-				</Router>
-			</div>
-			<Footer />
+        	</div>
+        <Footer />
+			</Router>
 		</>
 	);
 }
