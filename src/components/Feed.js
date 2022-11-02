@@ -90,7 +90,7 @@ const Feed = () => {
 
 	return (
 		<>
-			<div className="flex flex-wrap gap-12 p-4 rounded-lg bg-white justify-center">
+			<div className="flex flex-wrap gap-12 p-12 rounded-lg bg-white justify-center">
 				{postsArray}
 			</div>
 		</>

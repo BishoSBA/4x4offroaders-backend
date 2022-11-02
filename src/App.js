@@ -51,7 +51,7 @@ function App() {
 		<>
 			<Router>
 				<Header authenticated={authenticated} />
-				<div className="flex flex-col p-12 bg-white min-h-screen">
+				<div className="flex flex-col bg-white min-h-screen">
 					<Routes>
 						<Route path="/feed" element={<Feed />} />
 						<Route path="/login" element={<Login />} />
