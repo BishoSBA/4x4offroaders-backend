@@ -83,23 +83,24 @@ const Login = () => {
                 value="Log In"
                 className="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8"
               />
+              <button
+                type="button"
+                onClick={handleGoogleSignIn}
+                className="bg-red-700 text-white font-bold text-lg hover:bg-red-600 p-2 mt-6"
+              >
+                {" "}
+                Login with Google{" "}
+              </button>
+              <div className="text-center py-4">
+                <p>
+                  Don't have an account?{" "}
+                  <Link to="./signup" className="underline font-semibold">
+                    Register here
+                  </Link>
+                </p>
+              </div>
             </form>
-            <button
-              type="button"
-              onClick={handleGoogleSignIn}
-              className="bg-red-700 text-white font-bold text-lg hover:bg-red-600 p-2 mt-8"
-            >
-              {" "}
-              Login with Google{" "}
-            </button>
-            <div className="text-center pt-12 pb-12">
-              <p>
-                Don't have an account?{" "}
-                <Link to="./signup" className="underline font-semibold">
-                  Register here
-                </Link>
-              </p>
-            </div>
+
           </div>
         </div>
 
