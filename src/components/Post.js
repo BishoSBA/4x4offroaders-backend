@@ -15,7 +15,8 @@ const Post = () => {
 	};
 
 	return (
-		<div className="place-self-center p-12">
+		<div className="place-self-center p-6">
+			<span>{post.user}</span>
 			<figure>
 				<img src={post.image} alt="img" />
 			</figure>
