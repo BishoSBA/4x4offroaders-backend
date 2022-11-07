@@ -53,7 +53,7 @@ function App() {
 			<GoogleOAuthProvider clientId="968658749452-5n8j9kjdionsmfulgehjn9jcma2k5s8n.apps.googleusercontent.com">
 				<Router>
 					<Header authenticated={authenticated} />
-					<div className="flex flex-col p-12 bg-white min-h-screen">
+					<div className="flex flex-col bg-white min-h-screen">
 						<Routes>
 							<Route path="/feed" element={<Feed />} />
 							<Route path="/login" element={<Login />} />
