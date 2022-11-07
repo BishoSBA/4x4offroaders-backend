@@ -50,7 +50,7 @@ function App() {
 	// });
 	return (
 		<>
-			<GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID}>
+			<GoogleOAuthProvider clientId="968658749452-5n8j9kjdionsmfulgehjn9jcma2k5s8n.apps.googleusercontent.com">
 				<Router>
 					<Header authenticated={authenticated} />
 					<div className="flex flex-col p-12 bg-white min-h-screen">
