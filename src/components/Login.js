@@ -2,6 +2,8 @@ import { GoogleLogin } from "@react-oauth/google";
 import { json, Link, redirect } from "react-router-dom";
 import { useEffect } from "react";
 
+const clientId = "968658749452-5n8j9kjdionsmfulgehjn9jcma2k5s8n.apps.googleusercontent.com";
+
 const checkAuth = () => {};
 
 const Login = () => {
@@ -26,13 +28,15 @@ const Login = () => {
 		}
 	};
 
-	const handleGoogleSignIn = async (e) => {
-		window.open("http://localhost:2121/api/auth/google", "_self");
-		const token = fetch("http://localhost:2121/api/auth/google", {
-			method: "GET",
-		});
-		console.log(await token);
+	const onSuccess = (e) => {
+		console.log(e + "success");
+	};
 
+	const onFailure = (e) => {
+		console.log(e + "Failure");
+	};
+
+	const handleGoogleSignIn = (token) => {
 		if (!token) {
 			console.log("Google Auth Error");
 		} else {
@@ -87,12 +91,12 @@ const Login = () => {
 						</form>
 						<GoogleLogin
 							className="bg-red-700 text-white font-bold text-lg hover:bg-red-600 p-2 mt-8"
-							onSuccess={(credentialResponse) => {
-								console.log(credentialResponse);
-							}}
-							onError={() => {
-								console.log("Login Failed");
-							}}
+							clientId={clientId}
+							buttonText="Sign in with Google"
+							onSuccess={onSuccess}
+							onFailure={onFailure}
+							cookiePolicy={"single_host_origin"}
+							isSignedIn={true}
 						/>
 						;
 						{/* <button
