@@ -24,13 +24,7 @@ require("./config/passport")(passport);
 connectDB();
 
 //Solving cross-origin access issues
-app.use(
-	cors({
-		origin: "http://localhost:3000", // allow to server to accept request from different origin
-		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-		credentials: true, // allow session cookie from browser to pass through
-	})
-);
+app.use(cors());
 
 //Using EJS for views
 // app.set("view engine", "ejs");
@@ -66,14 +60,14 @@ app.use(passport.session());
 app.use(flash());
 
 //Check authentication
-const authCheck = (req, res, next) => {
-	next();
-};
+// const authCheck = (req, res, next) => {
+// 	next();
+// };
 
 //Setup Routes For Which The Server Is Listening
-app.get("/", authCheck, (req, res) => {
-	res.status(200);
-});
+// app.get("/", authCheck, (req, res) => {
+// 	res.status(200);
+// });
 
 app.use("/api/", mainRoutes);
 app.use("/api/auth", authRoutes);

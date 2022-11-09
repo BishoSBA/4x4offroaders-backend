@@ -4,7 +4,6 @@ import Feed from "./components/Feed";
 import Post from "./components/Post";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import "./App.css";
@@ -14,16 +13,31 @@ const Router = BrowserRouter;
 // id={useParams()}
 
 function App() {
-	const { authenticated, setAuthenticated } = useState(false);
-	const [profile, setProfile] = useState([]);
+	const [profile, setProfile] = useState(null);
 
-	const onSuccess = (res) => {
-		setProfile(res.profileObj);
-	};
-
-	const onFailure = (err) => {
-		console.log("failed", err);
-	};
+	useEffect(() => {
+		const getUser = async () => {
+			fetch("http://localhost:2121/api/auth/login/success", {
+				method: "GET",
+				credentials: "include",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+					"Access-Control-Allow-Credentials": true,
+				},
+			})
+				.then((response) => {
+					if (response.status == 200) return response.json();
+					throw new Error("Authentication has failed");
+				})
+				.then((resObject) => {
+					setProfile(resObject.user);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		};
+	});
 
 	const logOut = () => {
 		setProfile(null);
@@ -31,27 +45,19 @@ function App() {
 
 	return (
 		<>
-			<GoogleOAuthProvider clientId={clientId}>
-				<Router>
-					<Header authenticated={authenticated} logOut={logOut} />
-					<div className="flex flex-col bg-white min-h-screen">
-						<Routes>
-							<Route path="/feed" element={<Feed />} />
-							<Route
-								path="/login"
-								element={<Login onFailure={onFailure} onSuccess={onSuccess} />}
-							/>
-							<Route path="/" element={<Login />} />
-							<Route path="/post" element={<Post />} />
-							<Route
-								path="/signup"
-								element={<Signup onFailure={onFailure} onSuccess={onSuccess} />}
-							/>
-						</Routes>
-					</div>
-					<Footer />
-				</Router>
-			</GoogleOAuthProvider>
+			<Router>
+				<Header logOut={logOut} user={profile} />
+				<div className="flex flex-col bg-white min-h-screen">
+					<Routes>
+						<Route path="/feed" element={<Feed />} />
+						<Route path="/login" element={<Login />} />
+						<Route path="/" element={<Login />} />
+						<Route path="/post" element={<Post />} />
+						<Route path="/signup" element={<Signup />} />
+					</Routes>
+				</div>
+				<Footer />
+			</Router>
 		</>
 	);
 }

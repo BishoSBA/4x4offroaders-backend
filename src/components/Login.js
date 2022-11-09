@@ -1,8 +1,5 @@
-import { GoogleLogin } from "@react-oauth/google";
 import { json, Link, redirect } from "react-router-dom";
 import { useEffect } from "react";
-
-const clientId = "968658749452-5n8j9kjdionsmfulgehjn9jcma2k5s8n.apps.googleusercontent.com";
 
 const checkAuth = () => {};
 
@@ -10,7 +7,7 @@ const Login = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const token = await fetch("http://localhost:2121/api/auth/login", {
+		const user = await fetch("http://localhost:2121/api/auth/login", {
 			method: "POST",
 			headers: { "content-type": "application/json" },
 			body: JSON.stringify({
@@ -18,9 +15,9 @@ const Login = () => {
 				password: e.target.password.value,
 			}),
 		});
-		console.log(await token.json());
+		console.log(await user.json());
 
-		if (!token) {
+		if (!user) {
 			console.log("Auth Error");
 		} else {
 			// redirect("/feed");
@@ -28,20 +25,17 @@ const Login = () => {
 		}
 	};
 
-	const onSuccess = (e) => {
-		console.log(e + "success");
-	};
+	const handleGoogleSignIn = (user) => {
+		window.open("http://localhost:2121/api/auth/google", "_self");
 
-	const onFailure = (e) => {
-		console.log(e + "Failure");
-	};
-
-	const handleGoogleSignIn = (token) => {
-		if (!token) {
+		if (!user) {
 			console.log("Google Auth Error");
 		} else {
 			// redirect("/feed");
-			console.log("Google Success");
+			console.log(user);
+			// console.log("Google Success");
+			// console.log("Google Success");
+			// console.log("Google Success");
 		}
 	};
 
@@ -58,6 +52,7 @@ const Login = () => {
 
 					<div className="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
 						<p className="text-center text-3xl">Welcome.</p>
+
 						<form className="flex flex-col pt-3 md:pt-8" onSubmit={handleSubmit}>
 							<div className="flex flex-col pt-4">
 								<label htmlFor="email" className="text-lg">
@@ -86,27 +81,17 @@ const Login = () => {
 							<input
 								type="submit"
 								value="Log In"
-								className="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 my-8"
+								className="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8"
 							/>
 						</form>
-						<GoogleLogin
-							className="bg-red-700 text-white font-bold text-lg hover:bg-red-600 p-2 mt-8"
-							clientId={clientId}
-							buttonText="Sign in with Google"
-							onSuccess={onSuccess}
-							onFailure={onFailure}
-							cookiePolicy={"single_host_origin"}
-							isSignedIn={true}
-						/>
-						;
-						{/* <button
-                type="button"
-                onClick={handleGoogleSignIn}
-                className="bg-red-700 text-white font-bold text-lg hover:bg-red-600 p-2 mt-6"
-              >
-                {" "}
-                Login with Google{" "}
-              </button> */}
+						<button
+							type="button"
+							onClick={handleGoogleSignIn}
+							className="bg-red-700 text-white font-bold text-lg hover:bg-red-600 p-2 mt-6"
+						>
+							{" "}
+							Login with Google{" "}
+						</button>
 						<div className="text-center py-4">
 							<p>
 								Don't have an account?{" "}
