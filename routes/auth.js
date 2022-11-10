@@ -13,7 +13,7 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 router.post("/login", authController.postLogin); //Local Login Strategy
 router.post("/signup", authController.postSignup); //Local Login Strategy Signup
 router.get("/logout", authController.logout);
-router.get("/login/failed", authController.getGoogleFailed);
+router.get("/login/failed", authController.getLoginFailed);
 router.get("/login/success", authController.getLoginSuccess);
 
 const CLIENT_URL = "http://localhost:3000";

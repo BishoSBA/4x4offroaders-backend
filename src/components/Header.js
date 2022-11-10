@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Header = ({ user }) => {
+const Header = ({ logOut, user }) => {
 	const userImage = user != null ? user.image : "https://placeimg.com/80/80/people";
 	return (
 		<div className="sticky top-0 navbar bg-gray-900 z-10">
@@ -23,7 +23,7 @@ const Header = ({ user }) => {
 						<li>
 							<a>Profile</a>
 						</li>
-						<li>
+						<li onClick={logOut}>
 							<a>Logout</a>
 						</li>
 					</ul>

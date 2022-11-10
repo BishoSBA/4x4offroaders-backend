@@ -15,8 +15,6 @@ const Login = () => {
 				password: e.target.password.value,
 			}),
 		});
-		console.log(await user.json());
-
 		if (!user) {
 			console.log("Auth Error");
 		} else {
@@ -32,10 +30,7 @@ const Login = () => {
 			console.log("Google Auth Error");
 		} else {
 			// redirect("/feed");
-			console.log(user);
-			// console.log("Google Success");
-			// console.log("Google Success");
-			// console.log("Google Success");
+			console.log("Success");
 		}
 	};
 

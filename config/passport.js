@@ -18,8 +18,6 @@ module.exports = function (passport) {
 					googleId: profile.id,
 					displayName: profile.displayName,
 					email: profile.email,
-					firstName: profile.name.givenName,
-					lastName: profile.name.familyName,
 					image: profile.photos[0].value,
 				};
 

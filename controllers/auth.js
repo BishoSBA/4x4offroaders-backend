@@ -6,7 +6,7 @@ const CLIENT_URL = "http://localhost:3000";
 // When login succeeds
 exports.getLoginSuccess = (req, res) => {
 	if (req.user) {
-		res.statues(200).json({
+		res.status(200).json({
 			success: true,
 			message: "User Authenticated",
 			user: req.user,
@@ -16,10 +16,10 @@ exports.getLoginSuccess = (req, res) => {
 };
 
 // when login failed, send failed msg
-exports.getGoogleFailed = (req, res) => {
+exports.getLoginFailed = (req, res) => {
 	res.status(401).json({
 		success: false,
-		message: "user failed to authenticate with Google.",
+		message: "user failed to authenticate",
 	});
 };
 
@@ -33,8 +33,7 @@ exports.postLogin = (req, res) => {
 
 	if (validationErrors.length) {
 		req.flash("errors", validationErrors);
-		return false;
-		//return res.redirect("/login")
+		return res.redirect(CLIENT_URL);
 	}
 	req.body.email = validator.normalizeEmail(req.body.email, {
 		gmail_remove_dots: false,
@@ -42,26 +41,33 @@ exports.postLogin = (req, res) => {
 
 	passport.authenticate("local", (err, user, info) => {
 		if (err) {
-			return err;
-			// return next(err);
+			console.error(err);
+			return res.redirect(CLIENT_URL);
 		}
 		if (!user) {
 			req.flash("errors", info);
 			console.log("No user in log");
-			res.json({ User: null });
-			return;
-			// return res.redirect("/login");
+			res.status(401).json({
+				success: false,
+				message: "User Not Authenticated",
+				user: null,
+				// cookies: req.cookies
+			});
+
+			return res.redirect(CLIENT_URL);
 		}
 		req.logIn(user, (err) => {
 			if (err) {
-				res.json({ User: null, Error: err });
-				// return next(err );
+				res.json({ user: null, Error: err });
 			}
 			req.flash("success", { msg: "Success! You are logged in." });
-			console.log({ user });
-			res.json({ User: user });
+			res.status(200).json({
+				success: true,
+				message: "User Authenticated",
+				user: req.user,
+				// cookies: req.cookies
+			});
 			return;
-			// res.redirect(req.session.returnTo || "/profile");
 		});
 	})(req, res);
 };
@@ -69,13 +75,16 @@ exports.postLogin = (req, res) => {
 exports.logout = (req, res) => {
 	req.logout(() => {
 		console.log("User has logged out.");
+		res.status(200).json({
+			success: true,
+			message: "User logged out",
+			user: null,
+		});
 	});
 	req.session.destroy((err) => {
+		res.status(401);
 		if (err) console.log("Error : Failed to destroy the session during logout.", err);
-		req.user = null;
-		res.redirect("/");
 	});
-	res.redirect(CLIENT_URL + "/");
 };
 
 exports.postSignup = (req, res, next) => {
