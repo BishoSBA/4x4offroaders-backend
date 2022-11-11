@@ -28,6 +28,7 @@ function App() {
 			})
 				.then((response) => {
 					if (response.status == 200) return response.json();
+					setProfile(null);
 					throw new Error("Authentication has failed");
 				})
 				.then((resObject) => {
@@ -41,25 +42,26 @@ function App() {
 	}, []);
 
 	const logOut = async () => {
-		fetch("http://localhost:2121/api/auth/logout", {
-			method: "GET",
-			credentials: "include",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-				"Access-Control-Allow-Credentials": true,
-			},
-		})
-			.then((response) => {
-				if (response.status == 200) {
-					setProfile(null);
-					return;
-				}
-				throw new Error("Authentication has failed");
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+		window.open("http://localhost:2121/api/auth/logout", "_self");
+		// fetch("http://localhost:2121/api/auth/logout", {
+		// 	method: "GET",
+		// 	credentials: "include",
+		// 	headers: {
+		// 		Accept: "application/json",
+		// 		"Content-Type": "application/json",
+		// 		"Access-Control-Allow-Credentials": true,
+		// 	},
+		// })
+		// 	.then((response) => {
+		// 		if (response.status == 200) {
+		// 			setProfile(null);
+		// 			return;
+		// 		}
+		// 		throw new Error("Authentication has failed");
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log(err);
+		// 	});
 	};
 
 	return (

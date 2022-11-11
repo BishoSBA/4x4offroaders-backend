@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 
 const Header = ({ logOut, user }) => {
-	const userImage = user != null ? user.image : "https://placeimg.com/80/80/people";
+	const userImage = user != null ? user.image : "/assets/profile-pic-default.jpg";
+	const hidden = user != null ? "" : "hidden";
 	return (
 		<div className="sticky top-0 navbar bg-gray-900 z-10">
 			<div className="flex-1">
@@ -18,7 +19,10 @@ const Header = ({ logOut, user }) => {
 					</label>
 					<ul
 						tabIndex={0}
-						className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+						className={
+							"menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 " +
+							hidden
+						}
 					>
 						<li>
 							<a>Profile</a>

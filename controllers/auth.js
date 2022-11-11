@@ -85,9 +85,10 @@ exports.logout = (req, res) => {
 		res.status(401);
 		if (err) console.log("Error : Failed to destroy the session during logout.", err);
 	});
+	res.redirect(CLIENT_URL + "/login");
 };
 
-exports.postSignup = (req, res, next) => {
+exports.postSignup = (req, res) => {
 	const validationErrors = [];
 	if (!validator.isEmail(req.body.email))
 		validationErrors.push({ msg: "Please enter a valid email address." });
@@ -100,39 +101,40 @@ exports.postSignup = (req, res, next) => {
 
 	if (validationErrors.length) {
 		req.flash("errors", validationErrors);
-		return res.redirect("../signup");
+		return res.redirect(CLIENT_URL + "/signup");
 	}
 	req.body.email = validator.normalizeEmail(req.body.email, {
 		gmail_remove_dots: false,
 	});
 
 	const user = new User({
-		userName: req.body.userName,
+		displayName: req.body.userName,
 		email: req.body.email,
 		password: req.body.password,
+		image: "/assets/profile-pic-default.jpg",
 	});
 
 	User.findOne(
 		{ $or: [{ email: req.body.email }, { userName: req.body.userName }] },
 		(err, existingUser) => {
 			if (err) {
-				return next(err);
+				return console.error(err);
 			}
 			if (existingUser) {
 				req.flash("errors", {
 					msg: "Account with that email address or username already exists.",
 				});
-				return res.redirect("../signup");
+				return res.redirect(CLIENT_URL + "/signup");
 			}
 			user.save((err) => {
 				if (err) {
-					return next(err);
+					return console.error(err);
 				}
 				req.logIn(user, (err) => {
 					if (err) {
-						return next(err);
+						return console.error(err);
 					}
-					res.redirect("/profile");
+					res.redirect(CLIENT_URL + "/feed");
 				});
 			});
 		}

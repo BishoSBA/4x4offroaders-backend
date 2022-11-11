@@ -90,7 +90,7 @@ const Login = () => {
 						<div className="text-center py-4">
 							<p>
 								Don't have an account?{" "}
-								<Link to="./signup" className="underline font-semibold">
+								<Link to="/signup" className="underline font-semibold">
 									Register here
 								</Link>
 							</p>
