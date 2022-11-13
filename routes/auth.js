@@ -10,8 +10,8 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 // router.get("/login", ensureGuest, authController.getLogin);
 // router.get("/signup", ensureGuest, authController.getSignup);
 
-router.post("/login", authController.postLogin); //Local Login Strategy
-router.post("/signup", authController.postSignup); //Local Login Strategy Signup
+router.post("/login", (req, res) => authController.postLogin(req, res)); //Local Login Strategy
+router.post("/signup", (req, res) => authController.postSignup(req, res)); //Local Login Strategy Signup
 router.get("/logout", authController.logout);
 router.get("/login/failed", authController.getLoginFailed);
 router.get("/login/success", authController.getLoginSuccess);

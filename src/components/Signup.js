@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 
 const handleSubmit = async (e) => {
 	e.preventDefault();
@@ -7,14 +7,16 @@ const handleSubmit = async (e) => {
 		method: "POST",
 		headers: { "content-type": "application/json" },
 		body: JSON.stringify({
+			username: e.target.username.value,
 			email: e.target.email.value,
 			password: e.target.password.value,
+			confirmPassword: e.target.confirmPassword.value,
 		}),
 	});
 	if (!user) {
 		console.log("Auth Error");
 	} else {
-		// redirect("/feed");
+		redirect("/feed");
 		console.log("Success");
 	}
 };
@@ -46,13 +48,13 @@ const Signup = () => {
 						<p className="text-center text-3xl">Sign Up.</p>
 						<form className="flex flex-col pt-3 md:pt-8" onSubmit={handleSubmit}>
 							<div className="flex flex-col pt-4">
-								<label htmlFor="text" className="text-lg">
-									Display Name
+								<label htmlFor="username" className="text-lg">
+									Username
 								</label>
 								<input
 									type="text"
-									id="Name"
-									placeholder="FirstName LastName"
+									id="username"
+									placeholder="Username"
 									className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
 								/>
 							</div>
@@ -77,6 +79,18 @@ const Signup = () => {
 									type="password"
 									id="password"
 									placeholder="Password"
+									className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+								/>
+							</div>
+
+							<div className="flex flex-col pt-4">
+								<label htmlFor="confirmPassword" className="text-lg">
+									Confirm Password
+								</label>
+								<input
+									type="password"
+									id="confirmPassword"
+									placeholder="confirm Password"
 									className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
 								/>
 							</div>
