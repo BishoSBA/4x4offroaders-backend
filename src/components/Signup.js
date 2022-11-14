@@ -15,9 +15,10 @@ const handleSubmit = async (e) => {
 	});
 	if (!user) {
 		console.log("Auth Error");
+		return redirect("/signup");
 	} else {
-		redirect("/feed");
-		console.log("Success");
+		console.log(user);
+		return redirect("/feed");
 	}
 };
 

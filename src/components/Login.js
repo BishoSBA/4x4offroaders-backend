@@ -17,9 +17,10 @@ const Login = () => {
 		});
 		if (!user) {
 			console.log("Auth Error");
+			return redirect("/login");
 		} else {
-			// redirect("/feed");
-			console.log("Success");
+			console.log(user);
+			return redirect("/feed");
 		}
 	};
 

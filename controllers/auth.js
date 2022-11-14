@@ -3,6 +3,8 @@ const validator = require("validator");
 const User = require("../models/User");
 const CLIENT_URL = "http://localhost:3000";
 
+const login = (err) => {};
+
 // When login succeeds
 exports.getLoginSuccess = (req, res) => {
 	if (req.user) {
@@ -108,7 +110,7 @@ exports.postSignup = (req, res) => {
 	});
 
 	const user = new User({
-		displayName: req.body.userName,
+		username: req.body.username,
 		email: req.body.email,
 		password: req.body.password,
 		image: "/assets/profile-pic-default.jpg",
@@ -133,10 +135,16 @@ exports.postSignup = (req, res) => {
 				}
 				req.logIn(user, (err) => {
 					if (err) {
-						return console.error(err);
+						res.json({ user: null, Error: err });
 					}
-					console.log("User here");
-					res.redirect(CLIENT_URL + "/feed");
+					req.flash("success", { msg: "Success! You are logged in." });
+					res.status(200).json({
+						success: true,
+						message: "User Authenticated",
+						user: req.user,
+						// cookies: req.cookies
+					});
+					return;
 				});
 			});
 		}
