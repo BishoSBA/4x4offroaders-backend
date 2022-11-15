@@ -79,19 +79,17 @@ exports.postLogin = (req, res) => {
 };
 
 exports.logout = (req, res) => {
-	req.logout(() => {
-		console.log("User has logged out.");
-		res.status(200).json({
-			success: true,
-			message: "User logged out",
-			user: null,
-		});
+	req.logout((err) => {
+		if (err) console.error(err);
 	});
-	req.session.destroy((err) => {
-		res.status(401);
-		if (err) console.log("Error : Failed to destroy the session during logout.", err);
-	});
+	console.log("User has logged out.");
 	res.redirect(CLIENT_URL + "/login");
+	// req.session.destroy((err) => {
+	// 	if (err) {
+	// 		res.status(401);
+	// 		console.log("Error : Failed to destroy the session during logout.", err);
+	// 	}
+	// });
 };
 
 exports.postSignup = (req, res) => {
@@ -140,8 +138,9 @@ exports.postSignup = (req, res) => {
 				req.logIn(user, (err) => {
 					if (err) {
 						res.json({ user: null, Error: err });
+						return;
 					}
-					req.flash("success", { msg: "Success! You are logged in." });
+					// req.flash("success", { msg: "Success! You are logged in." });
 					res.status(200).json({
 						success: true,
 						message: "User Authenticated",

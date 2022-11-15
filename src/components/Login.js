@@ -3,12 +3,13 @@ import { useEffect } from "react";
 
 const checkAuth = () => {};
 
-const Login = () => {
+const Login = ({ setProfile }) => {
 	const navigate = useNavigate();
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const user = await fetch("http://localhost:2121/api/auth/login", {
+		let response = await fetch("http://localhost:2121/api/auth/login", {
 			method: "POST",
 			headers: { "content-type": "application/json" },
 			body: JSON.stringify({
@@ -16,11 +17,13 @@ const Login = () => {
 				password: e.target.password.value,
 			}),
 		});
-		if (!user) {
+		let user = await response.json();
+		if (!user.success) {
 			console.log("Auth Error");
 			return navigate("/login");
 		} else {
-			console.log(user);
+			console.log(user.user);
+			setProfile(user.user);
 			return navigate("/feed");
 		}
 	};

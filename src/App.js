@@ -52,8 +52,8 @@ function App() {
 				<div className="flex flex-col bg-white min-h-screen">
 					<Routes>
 						<Route path="/feed" element={<Feed />} />
-						<Route path="/login" element={<Login />} />
-						<Route path="/" element={<Login />} />
+						<Route path="/login" element={<Login setProfile={setProfile} />} />
+						<Route path="/" element={<Login setProfile={setProfile} />} />
 						<Route path="/post" element={<Post />} />
 						<Route path="/signup" element={<Signup />} />
 					</Routes>

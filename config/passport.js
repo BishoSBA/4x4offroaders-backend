@@ -16,8 +16,7 @@ module.exports = function (passport) {
 				console.log(profile);
 				const newUser = {
 					googleId: profile.id,
-					username: profile.username,
-					email: profile.email,
+					username: profile.displayName,
 					image: profile.photos[0].value,
 				};
 

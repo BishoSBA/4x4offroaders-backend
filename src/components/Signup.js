@@ -3,7 +3,7 @@ import { Link, redirect } from "react-router-dom";
 const handleSubmit = async (e) => {
 	e.preventDefault();
 
-	const user = await fetch("http://localhost:2121/api/auth/signup", {
+	const response = await fetch("http://localhost:2121/api/auth/signup", {
 		method: "POST",
 		headers: { "content-type": "application/json" },
 		body: JSON.stringify({
@@ -13,6 +13,7 @@ const handleSubmit = async (e) => {
 			confirmPassword: e.target.confirmPassword.value,
 		}),
 	});
+	const user = response.json();
 	if (!user) {
 		console.log("Auth Error");
 		return redirect("/signup");
