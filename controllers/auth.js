@@ -44,7 +44,11 @@ exports.postLogin = (req, res) => {
 	passport.authenticate("local", (err, user, info) => {
 		if (err) {
 			console.error(err);
-			return res.redirect(CLIENT_URL);
+			res.status(401).json({
+				success: false,
+				message: "user failed to authenticate",
+				user: null,
+			});
 		}
 		if (!user) {
 			req.flash("errors", info);
@@ -55,9 +59,9 @@ exports.postLogin = (req, res) => {
 				user: null,
 				// cookies: req.cookies
 			});
-
-			return res.redirect(CLIENT_URL);
+			return;
 		}
+		console.log(user);
 		req.logIn(user, (err) => {
 			if (err) {
 				res.json({ user: null, Error: err });
@@ -66,7 +70,7 @@ exports.postLogin = (req, res) => {
 			res.status(200).json({
 				success: true,
 				message: "User Authenticated",
-				user: req.user,
+				user: user,
 				// cookies: req.cookies
 			});
 			return;

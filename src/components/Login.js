@@ -1,9 +1,10 @@
-import { json, Link, redirect } from "react-router-dom";
+import { json, Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const checkAuth = () => {};
 
 const Login = () => {
+	const navigate = useNavigate();
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
@@ -17,10 +18,10 @@ const Login = () => {
 		});
 		if (!user) {
 			console.log("Auth Error");
-			return redirect("/login");
+			return navigate("/login");
 		} else {
 			console.log(user);
-			return redirect("/feed");
+			return navigate("/feed");
 		}
 	};
 

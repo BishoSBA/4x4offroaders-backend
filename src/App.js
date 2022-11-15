@@ -27,7 +27,7 @@ function App() {
 				},
 			})
 				.then((response) => {
-					if (response.status == 200) return response.json();
+					if (response.status === 200) return response.json();
 					setProfile(null);
 					throw new Error("Authentication has failed");
 				})
