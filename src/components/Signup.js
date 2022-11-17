@@ -1,40 +1,43 @@
-import { Link, redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const handleSubmit = async (e) => {
-	e.preventDefault();
+const Signup = ({ setProfile }) => {
+	const navigate = useNavigate();
 
-	const response = await fetch("http://localhost:2121/api/auth/signup", {
-		method: "POST",
-		headers: { "content-type": "application/json" },
-		body: JSON.stringify({
-			username: e.target.username.value,
-			email: e.target.email.value,
-			password: e.target.password.value,
-			confirmPassword: e.target.confirmPassword.value,
-		}),
-	});
-	const user = response.json();
-	if (!user) {
-		console.log("Auth Error");
-		return redirect("/signup");
-	} else {
-		console.log(user);
-		return redirect("/feed");
-	}
-};
+	const handleSubmit = async (e) => {
+		e.preventDefault();
 
-const handleGoogleSignIn = (user) => {
-	window.open("http://localhost:2121/api/auth/google", "_self");
+		const response = await fetch("http://localhost:2121/api/auth/signup", {
+			method: "POST",
+			headers: { "content-type": "application/json" },
+			body: JSON.stringify({
+				username: e.target.username.value,
+				email: e.target.email.value,
+				password: e.target.password.value,
+				confirmPassword: e.target.confirmPassword.value,
+			}),
+		});
 
-	if (!user) {
-		console.log("Google Auth Error");
-	} else {
-		// redirect("/feed");
-		console.log("Success");
-	}
-};
+		let user = await response.json();
+		if (!user.success) {
+			console.log("Auth Error");
+			return navigate("/signup");
+		} else {
+			console.log(user.user);
+			setProfile(user.user);
+			return navigate("/");
+		}
+	};
 
-const Signup = () => {
+	const handleGoogleSignIn = (user) => {
+		window.open("http://localhost:2121/api/auth/google", "_self");
+
+		if (!user) {
+			console.log("Google Auth Error");
+		} else {
+			console.log("Success");
+		}
+	};
+
 	return (
 		<div className="bg-white font-family-karla min-h-screen">
 			<div className="w-full flex flex-wrap">

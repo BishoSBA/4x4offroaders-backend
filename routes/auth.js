@@ -27,7 +27,7 @@ router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
 router.get(
 	"/google/callback",
 	passport.authenticate("google", {
-		successRedirect: CLIENT_URL + "/feed",
+		successRedirect: CLIENT_URL + "/",
 		failureRedirect: "/api/auth/login/failed",
 	})
 );

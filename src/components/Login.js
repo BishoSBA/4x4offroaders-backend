@@ -24,7 +24,7 @@ const Login = ({ setProfile }) => {
 		} else {
 			console.log(user.user);
 			setProfile(user.user);
-			return navigate("/feed");
+			return navigate("/");
 		}
 	};
 
@@ -34,7 +34,6 @@ const Login = ({ setProfile }) => {
 		if (!user) {
 			console.log("Google Auth Error");
 		} else {
-			// redirect("/feed");
 			console.log("Success");
 		}
 	};
