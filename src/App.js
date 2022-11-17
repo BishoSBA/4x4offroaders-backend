@@ -60,10 +60,34 @@ function App() {
 				<Header logOut={logOut} user={profile} />
 				<div className="flex flex-col bg-white min-h-screen">
 					<Routes>
-						<Route path="/login" element={<Login setProfile={setProfile} />} />
-						<Route path="/signup" element={<Signup setProfile={setProfile} />} />
-						<Route path="/" element={<Feed />} />
-						<Route path="/post" element={<Post />} />
+						<Route
+							path="/login"
+							element={
+								<Login
+									setProfile={setProfile}
+									ensureGuest={ensureGuest}
+									ensureAuth={ensureAuth}
+								/>
+							}
+						/>
+						<Route
+							path="/signup"
+							element={
+								<Signup
+									setProfile={setProfile}
+									ensureGuest={ensureGuest}
+									ensureAuth={ensureAuth}
+								/>
+							}
+						/>
+						<Route
+							path="/"
+							element={<Feed ensureGuest={ensureGuest} ensureAuth={ensureAuth} />}
+						/>
+						<Route
+							path="/post"
+							element={<Post ensureGuest={ensureGuest} ensureAuth={ensureAuth} />}
+						/>
 					</Routes>
 				</div>
 				<Footer />

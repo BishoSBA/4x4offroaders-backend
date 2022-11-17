@@ -1,6 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 
-const Signup = ({ setProfile }) => {
+const Signup = ({ setProfile, ensureGuest }) => {
+	ensureGuest();
+
 	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {

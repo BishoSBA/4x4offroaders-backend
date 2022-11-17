@@ -1,9 +1,9 @@
 import { json, Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-const checkAuth = () => {};
+const Login = ({ setProfile, ensureGuest }) => {
+	ensureGuest();
 
-const Login = ({ setProfile }) => {
 	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
