@@ -1,20 +1,29 @@
-# Install
+# 4x4offroaders
 
-`npm install`
 
---- 
+**Link to project:** 
+TODO
 
-# Things to add
 
-- Create a `.env` file in config folder and add the following as `key = value`
-  - PORT = 2121 (can be any port example: 3000)
-  - DB_STRING = `your database URI`
-  - CLOUD_NAME = `your cloudinary cloud name`
-  - API_KEY = `your cloudinary api key`
-  - API_SECRET = `your cloudinary api secret`
+## How It's Made:
 
----
+**Tech used:** React, reactrouter, tailwind, node.js, express, mongoDB, oauth2
 
-# Run
 
-`npm start`
+## Optimizations
+TODO
+
+
+## Lessons Learned:
+Using react in a full-stack project is quite interesting and have been a wonderful challenge
+
+## Examples:
+Take a look at these couple examples that I have in my own portfolio:
+
+**Right Notes:** https://github.com/bishosba/right-notes
+
+**Admin dashboard:** https://github.com/bishosba/project-admin-dashboard
+
+**Portfolio:** https://github.com/bishosba/portfolio
+
+
