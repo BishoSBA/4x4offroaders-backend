@@ -10,11 +10,9 @@ import "./App.css";
 
 const clientId = "968658749452-5n8j9kjdionsmfulgehjn9jcma2k5s8n.apps.googleusercontent.com";
 const Router = BrowserRouter;
-// id={useParams()}
 
 function App() {
 	const [profile, setProfile] = useState(null);
-	const navigate = useNavigate();
 
 	useEffect(() => {
 		const getUser = async () => {
@@ -42,14 +40,6 @@ function App() {
 		getUser();
 	}, []);
 
-	const ensureGuest = () => {
-		if (profile) return navigate("/");
-	};
-
-	const ensureAuth = () => {
-		if (!profile) return navigate("/login");
-	};
-
 	const logOut = async () => {
 		window.open("http://localhost:2121/api/auth/logout", "_self");
 	};
@@ -62,32 +52,14 @@ function App() {
 					<Routes>
 						<Route
 							path="/login"
-							element={
-								<Login
-									setProfile={setProfile}
-									ensureGuest={ensureGuest}
-									ensureAuth={ensureAuth}
-								/>
-							}
+							element={<Login setProfile={setProfile} profile={profile} />}
 						/>
 						<Route
 							path="/signup"
-							element={
-								<Signup
-									setProfile={setProfile}
-									ensureGuest={ensureGuest}
-									ensureAuth={ensureAuth}
-								/>
-							}
+							element={<Signup setProfile={setProfile} profile={profile} />}
 						/>
-						<Route
-							path="/"
-							element={<Feed ensureGuest={ensureGuest} ensureAuth={ensureAuth} />}
-						/>
-						<Route
-							path="/post"
-							element={<Post ensureGuest={ensureGuest} ensureAuth={ensureAuth} />}
-						/>
+						<Route path="/" element={<Feed profile={profile} />} />
+						<Route path="/post" element={<Post profile={profile} />} />
 					</Routes>
 				</div>
 				<Footer />

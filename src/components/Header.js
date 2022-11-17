@@ -6,7 +6,7 @@ const Header = ({ logOut, user }) => {
 	return (
 		<div className="sticky top-0 navbar bg-gray-900 z-10">
 			<div className="flex-1">
-				<Link to="/feed" className="btn btn-ghost normal-case text-xl">
+				<Link to="/" className="btn btn-ghost normal-case text-xl">
 					4x4Offroaders
 				</Link>
 			</div>

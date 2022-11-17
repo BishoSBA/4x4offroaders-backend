@@ -1,8 +1,12 @@
-// To Test
-
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import PostCard from "./PostCard";
 
-const Feed = () => {
+const Feed = ({ profile }) => {
+	const navigate = useNavigate();
+	useEffect(() => {
+		if (!profile) return navigate("/login");
+	});
 	// fetch the posts from the database
 	// const posts = await fetch("http://localhost:2121/api/feed")
 	// 	.then((response) => response.json())

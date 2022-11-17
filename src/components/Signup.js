@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-const Signup = ({ setProfile, ensureGuest }) => {
-	ensureGuest();
-
+const Signup = ({ setProfile, profile }) => {
 	const navigate = useNavigate();
+	useEffect(() => {
+		if (profile) return navigate("/");
+	});
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
