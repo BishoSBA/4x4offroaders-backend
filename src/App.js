@@ -59,7 +59,7 @@ function App() {
 							element={<Signup setProfile={setProfile} profile={profile} />}
 						/>
 						<Route path="/" element={<Feed profile={profile} />} />
-						<Route path="/post" element={<Post profile={profile} />} />
+						<Route path="/post:id" element={<Post profile={profile} />} />
 					</Routes>
 				</div>
 				<Footer />

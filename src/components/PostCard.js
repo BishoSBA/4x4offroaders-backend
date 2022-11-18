@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Postcard = ({ post }) => {
 	return (
-		<Link to="/post">
+		<Link to={"/post/" + post.id}>
 			<div className="card w-96 bg-base-100 h-full border border-gray-00 shadow-md p-4 hover:scale-105 duration-500">
 				<div className="flex bg-base-100 h-full w-full">
 					<img
