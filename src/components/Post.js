@@ -7,7 +7,22 @@ const Post = ({ profile }) => {
 	const navigate = useNavigate();
 	useEffect(() => {
 		if (!profile) return navigate("/login");
-	});
+
+		// fetch the posts from the database
+	// 	const getPosts = async () => {
+	// 		fetch("http://localhost:2121/api/post:")
+	// 			.then((response) => response.json())
+	// 			.then((data) => {
+	// 				// add the posts to an array
+	// 				setPosts(
+	// 					data.posts.map((post) => {
+	// 						return <PostCard key={post._id} post={post}></PostCard>;
+	// 					})
+	// 				);
+	// 			});
+	// 	};
+	// 	getPosts();
+	// }, []);
 
 	const post = {
 		caption: "a",
