@@ -25,7 +25,7 @@ module.exports = {
 		try {
 			const post = await Post.findById(req.params.id);
 			const comment = await Comment.find({ postid: req.params.id });
-			res.json({ post: post, user: req.user, comment: comment });
+			res.json({ post: post, user: req.user, comments: comment });
 			// res.render("post.ejs", { post: post, user: req.user, comment: comment });
 		} catch (err) {
 			console.log(err);

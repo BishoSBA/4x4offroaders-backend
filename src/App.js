@@ -5,10 +5,9 @@ import Post from "./components/Post";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, useParams, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import "./App.css";
 
-const clientId = "968658749452-5n8j9kjdionsmfulgehjn9jcma2k5s8n.apps.googleusercontent.com";
 const Router = BrowserRouter;
 
 function App() {
@@ -59,7 +58,7 @@ function App() {
 							element={<Signup setProfile={setProfile} profile={profile} />}
 						/>
 						<Route path="/" element={<Feed profile={profile} />} />
-						<Route path="/post:id" element={<Post profile={profile} />} />
+						<Route path="/post/:id" element={<Post profile={profile} />} />
 					</Routes>
 				</div>
 				<Footer />
