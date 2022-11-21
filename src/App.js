@@ -4,8 +4,9 @@ import Feed from "./components/Feed";
 import Post from "./components/Post";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Profile from "./components/Profile";
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 const Router = BrowserRouter;
@@ -59,6 +60,7 @@ function App() {
 						/>
 						<Route path="/" element={<Feed profile={profile} />} />
 						<Route path="/post/:id" element={<Post profile={profile} />} />
+						<Route path="/profile" element={<Profile profile={profile} />} />
 					</Routes>
 				</div>
 				<Footer />

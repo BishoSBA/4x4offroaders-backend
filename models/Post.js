@@ -24,7 +24,6 @@ const PostSchema = new mongoose.Schema({
 	tags: {
 		vehicle: {
 			type: String,
-			required: true,
 		},
 		brands: {
 			type: String,

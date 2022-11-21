@@ -7,7 +7,6 @@ module.exports = {
 		try {
 			const posts = await Post.find({ user: req.user.id });
 			res.json({ posts: posts, user: req.user });
-			// res.render("profile.ejs", { posts: posts, user: req.user });
 		} catch (err) {
 			console.log(err);
 		}
@@ -16,7 +15,6 @@ module.exports = {
 		try {
 			const posts = await Post.find().sort({ createdAt: "desc" }).lean();
 			res.json({ posts: posts });
-			// res.render("feed.ejs", { posts: posts });
 		} catch (err) {
 			console.log(err);
 		}
@@ -26,12 +24,12 @@ module.exports = {
 			const post = await Post.findById(req.params.id);
 			const comment = await Comment.find({ postid: req.params.id });
 			res.json({ post: post, user: req.user, comments: comment });
-			// res.render("post.ejs", { post: post, user: req.user, comment: comment });
 		} catch (err) {
 			console.log(err);
 		}
 	},
 	createPost: async (req, res) => {
+		console.log(req.user);
 		try {
 			// Upload image to cloudinary
 			const result = await cloudinary.uploader.upload(req.file.path);

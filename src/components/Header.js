@@ -24,9 +24,9 @@ const Header = ({ logOut, user }) => {
 							hidden
 						}
 					>
-						<li>
-							<a>Profile</a>
-						</li>
+						<Link to="/profile">
+							<li>Profile</li>
+						</Link>
 						<li onClick={logOut}>
 							<a>Logout</a>
 						</li>
