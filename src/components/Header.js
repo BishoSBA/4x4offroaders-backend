@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = ({ logOut, user }) => {
+	const navigate = useNavigate();
 	const userImage = user != null ? user.image : "/assets/profile-pic-default.jpg";
 	const hidden = user != null ? "" : "hidden";
 	return (
@@ -24,9 +25,7 @@ const Header = ({ logOut, user }) => {
 							hidden
 						}
 					>
-						<Link to="/profile">
-							<li>Profile</li>
-						</Link>
+						<li>{/* <a onClick={navigate("/profile")}>Profile</a> */}</li>
 						<li onClick={logOut}>
 							<a>Logout</a>
 						</li>

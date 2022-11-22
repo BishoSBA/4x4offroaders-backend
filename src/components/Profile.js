@@ -4,25 +4,28 @@ import PostCard from "./PostCard";
 
 const Profile = ({ profile }) => {
 	// const [post, setPost] = useState([]);
-	const [user, setUser] = useState({});
+	const [user, setUser] = useState("");
 
 	const navigate = useNavigate();
+
 	let postsArray = [];
 	useEffect(() => {
-		let posts = [];
 		if (!profile) return navigate("/login");
+
+		let posts = [];
 
 		// fetch the post from the database
 		const getProfile = async () => {
 			fetch("http://localhost:2121/api/profile")
 				.then((response) => response.json())
 				.then((data) => {
-					posts = data.posts;
 					setUser(data.user);
+					posts = data.posts;
 					// setComments(data.comments);
 				});
 		};
 		getProfile();
+
 		postsArray = posts.map((post) => {
 			return <PostCard key={post._id} post={post}></PostCard>;
 		});
