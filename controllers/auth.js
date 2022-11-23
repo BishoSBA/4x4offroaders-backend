@@ -12,7 +12,7 @@ exports.getLoginSuccess = (req, res) => {
 			success: true,
 			message: "User Authenticated",
 			user: req.user,
-			// cookies: req.cookies
+			cookies: req.cookies,
 		});
 	}
 };
@@ -71,7 +71,7 @@ exports.postLogin = (req, res) => {
 				success: true,
 				message: "User Authenticated",
 				user: user,
-				// cookies: req.cookies
+				cookies: req.cookies,
 			});
 			return;
 		});
@@ -145,7 +145,7 @@ exports.postSignup = (req, res) => {
 						success: true,
 						message: "User Authenticated",
 						user: req.user,
-						// cookies: req.cookies
+						cookies: req.cookies,
 					});
 					return;
 				});

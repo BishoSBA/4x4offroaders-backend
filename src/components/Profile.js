@@ -3,33 +3,35 @@ import { useParams, useNavigate } from "react-router-dom";
 import PostCard from "./PostCard";
 
 const Profile = ({ profile }) => {
-	// const [post, setPost] = useState([]);
-	const [user, setUser] = useState("");
+	const [posts, setPosts] = useState([]);
 
 	const navigate = useNavigate();
 
 	let postsArray = [];
+
+	// fetch the post from the database
 	useEffect(() => {
-		if (!profile) return navigate("/login");
-
-		let posts = [];
-
-		// fetch the post from the database
-		const getProfile = async () => {
-			fetch("http://localhost:2121/api/profile")
+		const getProfile = () => {
+			fetch("http://localhost:2121/api/profile", {
+				method: "GET",
+				credentials: "include",
+			})
 				.then((response) => response.json())
 				.then((data) => {
-					setUser(data.user);
-					posts = data.posts;
+					postsArray = data.posts;
 					// setComments(data.comments);
+					setPosts(
+						postsArray.map((post) => {
+							return <PostCard key={post._id} post={post}></PostCard>;
+						})
+					);
 				});
 		};
 		getProfile();
+	}, [profile]);
 
-		postsArray = posts.map((post) => {
-			return <PostCard key={post._id} post={post}></PostCard>;
-		});
-	});
+	if (!profile) return navigate("/login");
+	console.log(posts);
 
 	// <% for(var i=0; i<posts.length; i++) {%>
 	//   <li className="col-6 justify-content-between mt-5">
@@ -45,10 +47,10 @@ const Profile = ({ profile }) => {
 				<div className="col-6">
 					<div>
 						<p>
-							<strong>User Name</strong>: {user.username}
+							<strong>User Name</strong>: {profile.username}
 						</p>
 						<p>
-							<strong>Email</strong>: {user.email || "No Email"}
+							<strong>Email</strong>: {profile.email || "No Email"}
 						</p>
 					</div>
 					<div className="mt-12">
@@ -101,7 +103,7 @@ const Profile = ({ profile }) => {
 					</div>
 				</div>
 				<div className="col-6">
-					<ul className="row list-unstyled">{postsArray}</ul>
+					<ul className="row list-unstyled">{posts}</ul>
 					<div className="row justify-content-center mt-5">
 						<a className="btn btn-primary" href="/">
 							Return to Feed

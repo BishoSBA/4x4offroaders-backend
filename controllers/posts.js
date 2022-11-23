@@ -4,6 +4,7 @@ const Comment = require("../models/Comment");
 
 module.exports = {
 	getProfile: async (req, res) => {
+		console.log(req.isAuthenticated());
 		try {
 			const posts = await Post.find({ user: req.user.id });
 			res.json({ posts: posts, user: req.user });
