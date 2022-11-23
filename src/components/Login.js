@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 const Login = ({ setProfile, profile }) => {
 	const navigate = useNavigate();
