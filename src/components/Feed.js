@@ -11,7 +11,7 @@ const Feed = ({ profile }) => {
 
 		// fetch the posts from the database
 		const getPosts = async () => {
-			fetch("http://localhost:2121/api/feed")
+			fetch(process.env.REACT_APP_SERVER_URL + "api/feed")
 				.then((response) => response.json())
 				.then((data) => {
 					// add the posts to an array

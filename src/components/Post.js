@@ -1,12 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import PostCard from "./PostCard";
 import Comment from "./Comment";
 
 const Post = ({ profile }) => {
 	const [post, setPost] = useState({});
-	const [user, setUser] = useState({});
-	const [comments, setComments] = useState([]);
+	// const [user, setUser] = useState({});
+	// const [comments, setComments] = useState([]);
 	const postId = useParams().id;
 
 	const navigate = useNavigate();
@@ -16,7 +15,7 @@ const Post = ({ profile }) => {
 
 		// fetch the post from the database
 		const getPost = async () => {
-			fetch("http://localhost:2121/api/post/" + postId)
+			fetch(process.env.REACT_APP_SERVER_URL + "api/post/" + postId)
 				.then((response) => response.json())
 				.then((data) => {
 					setPost(data.post);

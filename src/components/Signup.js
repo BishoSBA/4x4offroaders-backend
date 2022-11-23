@@ -10,7 +10,7 @@ const Signup = ({ setProfile, profile }) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const response = await fetch("http://localhost:2121/api/auth/signup", {
+		const response = await fetch(process.env.REACT_APP_SERVER_URL + "api/auth/signup", {
 			method: "POST",
 			headers: { "content-type": "application/json" },
 			body: JSON.stringify({
@@ -33,7 +33,7 @@ const Signup = ({ setProfile, profile }) => {
 	};
 
 	const handleGoogleSignIn = (user) => {
-		window.open("http://localhost:2121/api/auth/google", "_self");
+		window.open(process.env.REACT_APP_SERVER_URL + "api/auth/google", "_self");
 
 		if (!user) {
 			console.log("Google Auth Error");

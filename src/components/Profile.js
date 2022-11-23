@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PostCard from "./PostCard";
 
 const Profile = ({ profile }) => {
@@ -12,7 +12,7 @@ const Profile = ({ profile }) => {
 	// fetch the post from the database
 	useEffect(() => {
 		const getProfile = () => {
-			fetch("http://localhost:2121/api/profile", {
+			fetch(process.env.REACT_APP_SERVER_URL + "api/profile", {
 				method: "GET",
 				credentials: "include",
 			})
@@ -56,7 +56,7 @@ const Profile = ({ profile }) => {
 					<div className="mt-12">
 						<h2 className="text-gray-900">Add a post</h2>
 						<form
-							action="http://localhost:2121/api/post/createPost"
+							action={process.env.REACT_APP_SERVER_URL + "api/post/createPost"}
 							encType="multipart/form-data"
 							method="POST"
 						>
