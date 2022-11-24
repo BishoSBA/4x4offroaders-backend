@@ -15,7 +15,7 @@ module.exports = {
 	getFeed: async (req, res) => {
 		try {
 			const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-			res.json({ posts: posts });
+			res.status(200).json({ posts: posts });
 		} catch (err) {
 			console.log(err);
 		}
