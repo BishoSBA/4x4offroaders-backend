@@ -15,8 +15,6 @@ router.get("/logout", authController.logout);
 router.get("/login/failed", authController.getLoginFailed);
 router.get("/login/success", authController.getLoginSuccess);
 
-const CLIENT_URL = "http://localhost:3000";
-
 //@desc Auth with Google
 //@route GET /api/auth/google
 router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
@@ -26,7 +24,7 @@ router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
 router.get(
 	"/google/callback",
 	passport.authenticate("google", {
-		successRedirect: CLIENT_URL + "/",
+		successRedirect: process.env.CLIENT_URL + "/",
 		failureRedirect: "/api/auth/login/failed",
 	})
 );

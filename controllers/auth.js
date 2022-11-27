@@ -1,9 +1,6 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
-const CLIENT_URL = "http://localhost:3000";
-
-const login = (err) => {};
 
 // When login succeeds
 exports.getLoginSuccess = (req, res) => {
@@ -35,7 +32,7 @@ exports.postLogin = (req, res) => {
 
 	if (validationErrors.length) {
 		req.flash("errors", validationErrors);
-		return res.redirect(CLIENT_URL);
+		return res.redirect(process.env.CLIENT_URL);
 	}
 	req.body.email = validator.normalizeEmail(req.body.email, {
 		gmail_remove_dots: false,
@@ -83,7 +80,7 @@ exports.logout = (req, res) => {
 		if (err) console.error(err);
 	});
 	console.log("User has logged out.");
-	res.redirect(CLIENT_URL + "/login");
+	res.redirect(process.env.CLIENT_URL + "/login");
 	// req.session.destroy((err) => {
 	// 	if (err) {
 	// 		res.status(401);
@@ -105,7 +102,7 @@ exports.postSignup = (req, res) => {
 	}
 	if (validationErrors.length) {
 		req.flash("errors", validationErrors);
-		return res.redirect(CLIENT_URL + "/signup");
+		return res.redirect(process.env.CLIENT_URL + "/signup");
 	}
 	req.body.email = validator.normalizeEmail(req.body.email, {
 		gmail_remove_dots: false,
@@ -129,7 +126,7 @@ exports.postSignup = (req, res) => {
 					msg: "Account with that email address or username already exists.",
 				});
 				console.log(res);
-				return res.redirect(CLIENT_URL + "/signup");
+				return res.redirect(process.env.CLIENT_URL + "/signup");
 			}
 			user.save((err) => {
 				if (err) {
