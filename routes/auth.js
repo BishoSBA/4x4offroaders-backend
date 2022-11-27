@@ -2,12 +2,7 @@ const express = require("express");
 const router = express.Router();
 const authController = require("../controllers/auth");
 const passport = require("passport");
-
-//Main Routes - simplified for now
-// router.get("/", homeController.getIndex);
-// router.get("/feed", ensureAuth, postsController.getFeed);
-// router.get("/login", ensureGuest, authController.getLogin);
-// router.get("/signup", ensureGuest, authController.getSignup);
+require("dotenv").config({ path: "./config/.env" });
 
 router.post("/login", (req, res) => authController.postLogin(req, res)); //Local Login Strategy
 router.post("/signup", (req, res) => authController.postSignup(req, res)); //Local Login Strategy Signup
@@ -24,7 +19,7 @@ router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
 router.get(
 	"/google/callback",
 	passport.authenticate("google", {
-		successRedirect: process.env.CLIENT_URL + "/",
+		successRedirect: process.env.CLIENT_URL,
 		failureRedirect: "/api/auth/login/failed",
 	})
 );

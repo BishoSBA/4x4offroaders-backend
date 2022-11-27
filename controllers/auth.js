@@ -1,6 +1,7 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
+require("dotenv").config({ path: "./config/.env" });
 
 // When login succeeds
 exports.getLoginSuccess = (req, res) => {
