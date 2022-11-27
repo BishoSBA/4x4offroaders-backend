@@ -33,6 +33,7 @@ module.exports = {
 		try {
 			// Upload image to cloudinary
 			const result = await cloudinary.uploader.upload(req.file.path);
+			console.log(await result);
 
 			await Post.create({
 				title: req.body.title,
@@ -40,11 +41,16 @@ module.exports = {
 				cloudinaryId: result.public_id,
 				caption: req.body.caption,
 				likes: 0,
+				tags: {
+					vehicle: "LC78",
+					brands: "Fox",
+					workshops: "Saudi4x4Center",
+				},
 				user: req.user.id,
 			});
 			console.log("Post has been added!");
 			// res.json({ success: true, message: "Post has been added" });
-			res.redirect(process.env.CLIENT_URL + "profile");
+			res.status(200).redirect(process.env.CLIENT_URL + "profile");
 		} catch (err) {
 			console.log(err);
 		}
