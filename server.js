@@ -26,7 +26,8 @@ connectDB();
 //Solving cross-origin access issues
 app.use(
 	cors({
-		origin: "http://localhost:3000", // allow to server to accept request from different origin
+		// origin: "http://localhost:3000",
+		origin: "https://4x4offroaders.netlify.app/", // allow to server to accept request from different origin
 		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 		credentials: true, // allow session cookie from browser to pass through
 	})
