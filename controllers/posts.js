@@ -4,7 +4,6 @@ const Comment = require("../models/Comment");
 
 module.exports = {
 	getProfile: async (req, res) => {
-		console.log(req.isAuthenticated());
 		try {
 			const posts = await Post.find({ user: req.user.id });
 			res.json({ posts: posts, user: req.user });
@@ -33,7 +32,6 @@ module.exports = {
 		try {
 			// Upload image to cloudinary
 			const result = await cloudinary.uploader.upload(req.file.path);
-			console.log(await result);
 
 			await Post.create({
 				title: req.body.title,

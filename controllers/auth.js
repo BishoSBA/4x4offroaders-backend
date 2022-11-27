@@ -58,7 +58,6 @@ exports.postLogin = (req, res) => {
 			});
 			return;
 		}
-		console.log(user);
 		req.logIn(user, (err) => {
 			if (err) {
 				res.json({ user: null, Error: err });
@@ -80,7 +79,7 @@ exports.logout = (req, res) => {
 		if (err) console.error(err);
 	});
 	console.log("User has logged out.");
-	res.redirect(process.env.CLIENT_URL + "/login");
+	res.redirect(process.env.CLIENT_URL + "login");
 	// req.session.destroy((err) => {
 	// 	if (err) {
 	// 		res.status(401);
@@ -102,7 +101,7 @@ exports.postSignup = (req, res) => {
 	}
 	if (validationErrors.length) {
 		req.flash("errors", validationErrors);
-		return res.redirect(process.env.CLIENT_URL + "/signup");
+		return res.redirect(process.env.CLIENT_URL + "signup");
 	}
 	req.body.email = validator.normalizeEmail(req.body.email, {
 		gmail_remove_dots: false,
@@ -125,8 +124,7 @@ exports.postSignup = (req, res) => {
 				req.flash("errors", {
 					msg: "Account with that email address or username already exists.",
 				});
-				console.log(res);
-				return res.redirect(process.env.CLIENT_URL + "/signup");
+				return res.redirect(process.env.CLIENT_URL + "signup");
 			}
 			user.save((err) => {
 				if (err) {
