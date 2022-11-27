@@ -12,6 +12,12 @@ exports.getLoginSuccess = (req, res) => {
 			user: req.user,
 			cookies: req.cookies,
 		});
+	} else {
+		console.log(req);
+		res.status(401).json({
+			success: false,
+			message: "No User even though authenticated",
+		});
 	}
 };
 
