@@ -32,6 +32,8 @@ https://4x4offroaders.netlify.app
 ## Examples:
 Take a look at these couple examples that I have in my own portfolio:
 
+**4x4offroaders Frontend:** https://github.com/bishosba/4x4offroaders-frontend
+
 **Right Notes:** https://github.com/bishosba/right-notes
 
 **Admin dashboard:** https://github.com/bishosba/project-admin-dashboard
