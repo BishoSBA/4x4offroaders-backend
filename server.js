@@ -33,6 +33,9 @@ app.use(
 	})
 );
 
+//Trust the hosting platform for the server
+app.set('trust proxy', true);
+
 //Static Folder
 app.use(express.static("public"));
 
@@ -53,8 +56,12 @@ app.use(
 		resave: false,
 		saveUninitialized: false,
 		store: new MongoStore({ mongooseConnection: mongoose.connection }),
-	})
-);
+		cookie: {
+  			sameSite: 'none',
+			  secure: 'auto'
+			}
+		})
+	);
 
 // Passport middleware
 app.use(passport.initialize());
