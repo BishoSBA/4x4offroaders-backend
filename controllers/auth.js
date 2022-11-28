@@ -12,12 +12,6 @@ exports.getLoginSuccess = (req, res) => {
 			user: req.user,
 			cookies: req.cookies,
 		});
-	} else {
-		console.log(req);
-		res.status(401).json({
-			success: false,
-			message: "No User even though authenticated",
-		});
 	}
 };
 
@@ -61,7 +55,6 @@ exports.postLogin = (req, res) => {
 				success: false,
 				message: "User Not Authenticated",
 				user: null,
-				// cookies: req.cookies
 			});
 			return;
 		}
@@ -86,13 +79,13 @@ exports.logout = (req, res) => {
 		if (err) console.error(err);
 	});
 	console.log("User has logged out.");
-	res.redirect(process.env.CLIENT_URL + "login");
-	// req.session.destroy((err) => {
-	// 	if (err) {
-	// 		res.status(401);
-	// 		console.log("Error : Failed to destroy the session during logout.", err);
-	// 	}
-	// });
+	req.session.destroy((err) => {
+		if (err) {
+			res.status(401);
+			console.log("Error : Failed to destroy the session during logout.", err);
+		}
+		res.redirect(process.env.CLIENT_URL + "login");
+	});
 };
 
 exports.postSignup = (req, res) => {
