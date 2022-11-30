@@ -24,7 +24,6 @@ module.exports = {
 		try {
 			const post = await Post.findById(req.params.id);
 			const postUser = await User.findById(post.user);
-			console.log(postUser);
 			const comment = await Comment.find({ postid: req.params.id });
 			res.json({ post: post, user: req.user, postUser: postUser, comments: comment });
 		} catch (err) {
