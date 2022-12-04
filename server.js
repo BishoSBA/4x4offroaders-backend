@@ -34,7 +34,7 @@ app.use(
 );
 
 //Trust the hosting platform for the server
-app.set("trust proxy", true);
+// app.set("trust proxy", true);
 
 //Static Folder
 app.use(express.static("public"));
@@ -69,16 +69,6 @@ app.use(passport.session());
 
 //Use flash messages for errors, info, ect...
 app.use(flash());
-
-//Check authentication
-// const authCheck = (req, res, next) => {
-// 	next();
-// };
-
-//Setup Routes For Which The Server Is Listening
-// app.get("/", authCheck, (req, res) => {
-// 	res.status(200);
-// });
 
 app.use("/api/", mainRoutes);
 app.use("/api/auth", authRoutes);

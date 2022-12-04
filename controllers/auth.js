@@ -5,12 +5,18 @@ require("dotenv").config({ path: "./config/.env" });
 
 // When login succeeds
 exports.getLoginSuccess = (req, res) => {
+	console.log(req.session);
 	if (req.user) {
 		res.status(200).json({
 			success: true,
 			message: "User Authenticated",
 			user: req.user,
 			cookies: req.cookies,
+		});
+	} else {
+		res.status(401).json({
+			success: false,
+			message: "user failed to authenticate",
 		});
 	}
 };
@@ -62,6 +68,7 @@ exports.postLogin = (req, res) => {
 			if (err) {
 				res.json({ user: null, Error: err });
 			}
+			console.log(req.session);
 			req.flash("success", { msg: "Success! You are logged in." });
 			res.status(200).json({
 				success: true,
