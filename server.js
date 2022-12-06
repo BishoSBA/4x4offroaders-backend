@@ -26,15 +26,15 @@ connectDB();
 //Solving cross-origin access issues
 app.use(
 	cors({
-		origin: "http://localhost:3000",
-		// origin: "https://4x4offroaders.netlify.app", // allow to server to accept request from different origin
+		// origin: "http://localhost:3000",
+		origin: "https://4x4offroaders.netlify.app", // allow to server to accept request from different origin
 		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 		credentials: true, // allow session cookie from browser to pass through
 	})
 );
 
 //Trust the hosting platform for the server
-// app.set("trust proxy", true);
+app.set("trust proxy", true);
 
 //Static Folder
 app.use(express.static("public"));

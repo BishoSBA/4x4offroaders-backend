@@ -5,16 +5,15 @@ require("dotenv").config({ path: "./config/.env" });
 
 // When login succeeds
 exports.getLoginSuccess = (req, res) => {
-	console.log(req.session);
+	// console.log(req.session);
 	if (req.user) {
 		res.status(200).json({
 			success: true,
 			message: "User Authenticated",
 			user: req.user,
-			cookies: req.cookies,
 		});
 	} else {
-		res.status(401).json({
+		res.json({
 			success: false,
 			message: "user failed to authenticate",
 		});
@@ -74,9 +73,7 @@ exports.postLogin = (req, res) => {
 				success: true,
 				message: "User Authenticated",
 				user: user,
-				cookies: req.cookies,
 			});
-			return;
 		});
 	})(req, res);
 };
@@ -147,7 +144,6 @@ exports.postSignup = (req, res) => {
 						success: true,
 						message: "User Authenticated",
 						user: req.user,
-						cookies: req.cookies,
 					});
 					return;
 				});

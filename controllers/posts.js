@@ -42,9 +42,9 @@ module.exports = {
 				caption: req.body.caption,
 				likes: 0,
 				tags: {
-					vehicle: "LC78",
-					brands: "Fox",
-					workshops: "Saudi4x4Center",
+					vehicle: req.body.vehicle,
+					brands: req.body.brand,
+					workshops: req.body.workshop,
 				},
 				user: req.user.id,
 			});
